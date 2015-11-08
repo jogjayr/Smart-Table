@@ -1,5 +1,5 @@
 /** 
-* @version 2.1.4
+* @version 2.1.5
 * @license MIT
 */
 (function (ng, undefined){
@@ -59,6 +59,7 @@ ng.module('smart-table')
     var pipeAfterSafeCopy = true;
     var ctrl = this;
     var lastSelected;
+    var lastHighlighted;
 
     function copyRefs (src) {
       return src ? [].concat(src) : [];
@@ -184,6 +185,14 @@ ng.module('smart-table')
           rows[index].isSelected = !rows[index].isSelected;
         }
       }
+    };
+
+    this.highlight = function highlight(row) {
+      row.isHighlighted = row.isHighlighted !== true;
+      if (lastHighlighted) {
+        lastHighlighted.isHighlighted = false;
+      }
+      lastHighlighted = row;
     };
 
     /**
