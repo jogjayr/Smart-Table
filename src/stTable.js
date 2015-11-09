@@ -147,11 +147,19 @@ ng.module('smart-table')
       }
     };
 
+    /**
+     * highlight a dataRow (it will set attribute isHighlighted to true to the row object)
+     * and un-highlight the previously highlighted row. if there was no previously
+     * highlighted row, set it to be the first row in the collection
+     * @param {Object} row - the row to highlight
+     */
     this.highlight = function highlight(row) {
-      row.isHighlighted = row.isHighlighted !== true;
-      if (lastHighlighted) {
-        lastHighlighted.isHighlighted = false;
+      row.isHighlighted = true;
+      if (!lastHighlighted) {
+        var rows = copyRefs(displayGetter($scope));
+        lastHighlighted = rows[0];
       }
+      lastHighlighted.isHighlighted = false;
       lastHighlighted = row;
     };
 
