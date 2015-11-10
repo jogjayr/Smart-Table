@@ -159,7 +159,9 @@ ng.module('smart-table')
         var rows = copyRefs(displayGetter($scope));
         lastHighlighted = rows[0];
       }
-      lastHighlighted.isHighlighted = false;
+      if(lastHighlighted !== row) {
+        lastHighlighted.isHighlighted = false;
+      }
       lastHighlighted = row;
     };
 
