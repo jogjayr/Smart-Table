@@ -63,6 +63,7 @@ ng.module('smart-table')
       }, function (newValue, oldValue) {
         if (newValue !== oldValue) {
           tableState.pagination.start = 0;
+          lastHighlighted = false;
           updateSafeCopy();
         }
       });
