@@ -154,16 +154,13 @@ ng.module('smart-table')
      * highlighted row, set it to be the first row in the collection
      * @param {Object} row - the row to highlight
      */
-    this.highlight = function highlight(row) {
-      row.isHighlighted = true;
-      if (!lastHighlighted) {
-        var rows = copyRefs(displayGetter($scope));
-        lastHighlighted = rows[0];
-      }
-      if(lastHighlighted !== row) {
-        lastHighlighted.isHighlighted = false;
-      }
-      lastHighlighted = row;
+    this.highlight = function highlight(rowToHighlight) {
+      //naive implementation of highlight toggle on a list
+      var allRows = copyRefs(displayGetter($scope));
+      allRows.map(function(row) {
+        row.isHighlighted = false;
+      });
+      rowToHighlight.isHighlighted = true;
     };
 
     /**
